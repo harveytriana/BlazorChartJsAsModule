@@ -1,0 +1,32 @@
+﻿@page "/lines-chart"
+@inject IJSRuntime _jsRunTime
+
+<!-- Sample by: @__harveyt__ -->
+
+<h3>Chart Line Basic</h3>
+<p>Chart JS interop, with command actions in JavaScript</p>
+<hr />
+<div style="min-width:200px;min-height:200px;width:100%">
+	<canvas id="canvas"></canvas>
+</div>
+<br>
+<br>
+<div style="text-align: center;">
+	<button class="btn btn-primary" id="randomizeData">Randomize Data</button>
+	<button class="btn btn-primary" id="addDataset">Add Dataset</button>
+	<button class="btn btn-primary" id="removeDataset">Remove Dataset</button>
+	<button class="btn btn-primary" id="addData">Add Data</button>
+	<button class="btn btn-primary" id="removeData">Remove Data</button>
+</div>
+
+@code {
+	protected override async Task OnInitializedAsync()
+	{
+		var js = "./modules/lines-chart.js";
+		var _module = await _jsRunTime.InvokeAsync<IJSObjectReference>("import", js);
+		// do somthing ...
+		await _module.InvokeVoidAsync("DrawPlot");
+	}
+}
+
+
